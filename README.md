@@ -1,4 +1,4 @@
-## Project Title: TrustPilot Review Scraper for NordVPN and CyberGhost VPN
+## TrustPilot Review Scraper for NordVPN and CyberGhost VPN
 
 This project is a web scraping tool that extracts reviews about NordVPN and CyberGhost VPN from Trustpilot.com. The extracted reviews are then stored in Elasticsearch, which serves as the database for the application. Finally, a FastAPI-based API is used to serve the data to a Dash app, where users can visualize the data and gain insights into the opinions and experiences of others who have used these VPN services.
 
