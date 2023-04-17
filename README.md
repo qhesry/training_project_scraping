@@ -23,6 +23,11 @@ Before you can run this project, you will need to install the following dependen
 6. Run the Dash app by executing `python dash/dash_app.py` while in the dash folder.
 7. Open a web browser and navigate to [http://localhost:8050](http://localhost:8050) to view the dashboard.
 
+## Update to come
+
+- Config file for elasticsearch and server configurations.
+- Docker compose file to deploy the app.
+
 ## Usage
 
 Once the application is running, you can use the Dash app to view some metrics example.
