@@ -1,0 +1,30 @@
+{
+  "properties": {
+    "name": {
+      "type": "text"
+    },
+    "rating": {
+      "type": "float"
+    },
+    "stars": {
+      "type": "object",
+      "properties": {
+        "5": {
+          "type": "text"
+        },
+        "4": {
+          "type": "text"
+        },
+        "3": {
+          "type": "text"
+        },
+        "2": {
+          "type": "text"
+        },
+        "1": {
+          "type": "text"
+        }
+      }
+    }
+  }
+}

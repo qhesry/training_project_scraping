@@ -1,0 +1,51 @@
+{
+  "properties": {
+    "company_name": {
+      "type": "keyword"
+    },
+    "title": {
+      "type": "text"
+    },
+    "username": {
+      "type": "keyword"
+    },
+    "rating": {
+      "type": "float"
+    },
+    "content": {
+      "type": "text"
+    },
+    "date_of_review": {
+      "type": "text"
+    },
+    "date_of_experience": {
+      "type": "text"
+    },
+    "author_answer": {
+      "type": "text"
+    },
+    "date_answer": {
+      "type": "text"
+    },
+    "answer_content": {
+      "type": "text"
+    },
+    "sentiment_score": {
+      "type": "float"
+    },
+    "accuracy_score": {
+      "type": "float"
+    },
+    "title_keywords": {
+      "type": "nested",
+      "properties": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "processed_text": {
+      "type": "text"
+    }
+  }
+}

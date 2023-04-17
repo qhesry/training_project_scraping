@@ -1,0 +1,8 @@
+{
+    "properties": {
+        "last_scraped_at": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+        }
+    }
+}
