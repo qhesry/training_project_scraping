@@ -130,3 +130,4 @@ dmypy.json
 .pyre/
 
 http_ca.crt
+config.json

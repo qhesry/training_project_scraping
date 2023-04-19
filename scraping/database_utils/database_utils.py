@@ -1,7 +1,8 @@
 from elasticsearch import Elasticsearch, exceptions
 import json
+from . import config
 
-es = Elasticsearch(hosts="https://@localhost:9200", basic_auth=("elastic", "elastic"), ca_certs="./http_ca.crt")
+es = Elasticsearch(hosts=config["elasticsearch_hosts"], basic_auth=(config["elasticsearch_username"], config["elasticsearch_password"]), ca_certs=config["elasticsearch_ca_certs_path"])
 
 def create_index():
     """

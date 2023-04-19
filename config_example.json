@@ -1,0 +1,9 @@
+{
+    "server_url" : "http://localhost:8000",
+    "elasticsearch": {
+        "elasticsearch_hosts": "https://@localhost:9200",
+        "elasticsearch_username": "elastic",
+        "elasticsearch_password": "",
+        "elasticsearch_ca_certs_path": "<absolutepath>/training_project_scraping/http_ca.crt"
+    }
+}

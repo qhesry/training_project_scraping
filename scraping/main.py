@@ -1,6 +1,7 @@
 import nltk
-from database_utils import create_index
-from scrapping import scrap_url
+from database_utils.database_utils import create_index
+from processing.scrapping import scrap_url
+import os
 
 if __name__ == "__main__":
     # Urls to scrap

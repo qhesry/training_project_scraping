@@ -1,5 +1,5 @@
 from transformers import pipeline
-from database_utils import get_reviews_not_processed, update_review
+from database_utils.database_utils import get_reviews_not_processed, update_review
 
 sentiment_pipeline = pipeline(model="nlptown/bert-base-multilingual-uncased-sentiment")
 

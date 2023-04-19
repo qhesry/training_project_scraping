@@ -37,12 +37,7 @@
       "type": "float"
     },
     "title_keywords": {
-      "type": "nested",
-      "properties": {
-        "keyword": {
-          "type": "keyword"
-        }
-      }
+      "type": "keyword"
     },
     "processed_text": {
       "type": "text"

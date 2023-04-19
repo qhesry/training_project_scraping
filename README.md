@@ -16,16 +16,16 @@ Before you can run this project, you will need to install the following dependen
 ## Installation
 
 1. Clone this repository to your local machine.
-2. You need to install an elasticsearch database and change the connection credentials in `fastapi/main.py` and in `scraping/database_utils.py`
-3. Install the required dependencies by running `pip install -r requirements.txt` in your terminal.
-4. Run the scraper by executing `python scraping/main.py`.
-5. Run the FastAPI server by executing `uvicorn server:app --reload` while in the fast api folder.
-6. Run the Dash app by executing `python dash/dash_app.py` while in the dash folder.
-7. Open a web browser and navigate to [http://localhost:8050](http://localhost:8050) to view the dashboard.
+2. You need to install an elasticsearch database.
+3. Copy `config_example.json` to `config.json` and complete your config setup.
+4. Install the required dependencies by running `pip install -r requirements.txt` in your terminal.
+5. Run the scraper by executing `python scraping/main.py`.
+6. Run the FastAPI server by executing `uvicorn server:app --reload` while in the fast api folder.
+7. Run the Dash app by executing `python dash/dash_app.py` while in the dash folder.
+8. Open a web browser and navigate to [http://localhost:8050](http://localhost:8050) to view the dashboard.
 
 ## Update to come
 
-- Config file for elasticsearch and server configurations.
 - Docker compose file to deploy the app.
 
 ## Usage
