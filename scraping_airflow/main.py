@@ -3,6 +3,7 @@ from database_utils.database_utils import create_index
 from processing.scrapping import scrap_url
 import os
 
+print('Hello')
 if __name__ == "__main__":
     # Urls to scrap
     urls = ["https://www.trustpilot.com/review/cyberghostvpn.com", "https://www.trustpilot.com/review/nordvpn.com"]

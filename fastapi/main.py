@@ -1,13 +1,14 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from elasticsearch import Elasticsearch
-import json
-
-with open('../config.json') as f:
-    config = json.load(f)["elasticsearch"]
+import os
 
 app = FastAPI()
-es = Elasticsearch(hosts=config["elasticsearch_hosts"], basic_auth=(config["elasticsearch_username"], config["elasticsearch_password"]), ca_certs=config["elasticsearch_ca_certs_path"])
+
+es_username = os.environ.get("ELASTICSEARCH_USERNAME", "elastic")
+es_password = os.environ.get("ELASTICSEARCH_PASSWORD", "elastic")
+es_hosts = os.environ.get("ELASTICSEARCH_HOSTS", "http://localhost:9200")
+es = Elasticsearch(hosts=es_hosts, basic_auth=(es_username, es_password))
 
 @app.get("/average-rating-by-company/{company_name}")
 async def average_rating_by_company(company_name: str):
@@ -59,7 +60,7 @@ async def top_terms(company_name: str):
             "top_title_terms": {
                 "terms": {
                     "field": "title_keywords",
-                    "exclude": "[.!]"  # Exclude characters "." and "!"
+                    "exclude": "[.!,]"  # Exclude characters "." and "!" and ","
                 }
             }
         }

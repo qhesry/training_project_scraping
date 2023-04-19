@@ -1,8 +1,11 @@
 from elasticsearch import Elasticsearch, exceptions
 import json
-from . import config
+import os
 
-es = Elasticsearch(hosts=config["elasticsearch_hosts"], basic_auth=(config["elasticsearch_username"], config["elasticsearch_password"]), ca_certs=config["elasticsearch_ca_certs_path"])
+es_username = os.environ.get("ELASTICSEARCH_USERNAME", "elastic")
+es_password = os.environ.get("ELASTICSEARCH_PASSWORD", "elastic")
+es_hosts = os.environ.get("ELASTICSEARCH_HOSTS", "http://localhost:9200")
+es = Elasticsearch(hosts=es_hosts, basic_auth=(es_username, es_password))
 
 def create_index():
     """
