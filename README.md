@@ -27,6 +27,7 @@ Before you can run this project, you will need to install the following dependen
 ## Update to come
 
 - Docker compose file to deploy the app.
+- Airflow to execute scrip using cron.
 
 ## Usage
 
