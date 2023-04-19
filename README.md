@@ -4,14 +4,7 @@ This project is a web scraping tool that extracts reviews about NordVPN and Cybe
 
 ## Prerequisites
 
-Before you can run this project, you will need to install the following dependencies:
-
-- Python 3.8 or higher
-- Elasticsearch
-- FastAPI
-- Dash
-- Beautiful Soup 4
-- Requests
+Before you can run this project, you will need to install the following dependencies contained into all the `requirements.txt` files
 
 ## Installation
 
@@ -26,8 +19,7 @@ Before you can run this project, you will need to install the following dependen
 
 ## Update to come
 
-- Docker compose file to deploy the app.
-- Airflow to execute scrip using cron.
+- Docker compose file to deploy the app. (Currently working on it)
 
 ## Usage
 
