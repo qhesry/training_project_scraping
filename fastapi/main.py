@@ -1,9 +1,13 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from elasticsearch import Elasticsearch
+import json
+
+with open('../config.json') as f:
+    config = json.load(f)["elasticsearch"]
 
 app = FastAPI()
-es = Elasticsearch(hosts="https://@localhost:9200", basic_auth=("elastic", "elastic"), ca_certs="../http_ca.crt")
+es = Elasticsearch(hosts=config["elasticsearch_hosts"], basic_auth=(config["elasticsearch_username"], config["elasticsearch_password"]), ca_certs=config["elasticsearch_ca_certs_path"])
 
 @app.get("/average-rating-by-company/{company_name}")
 async def average_rating_by_company(company_name: str):
@@ -61,7 +65,6 @@ async def top_terms(company_name: str):
         }
     })
     top_title_terms = [(t["key"], t["doc_count"]) for t in res["aggregations"]["top_title_terms"]["buckets"]]
-    print(top_title_terms)
     return JSONResponse(content={"top_title_terms": top_title_terms})
 
 @app.get("/average-sentiment-by-company/{company_name}")

@@ -4,10 +4,10 @@ from datetime import datetime
 import time
 import requests
 
-from utils import convert_date, create_unique_id
-from preprocessing import preprocessing_review
-from database_utils import insert_review, insert_company_infos, get_last_scraping_time, set_last_scraped_at
-from sentiment_analysis import calculate_sentiment
+from utils.utils import convert_date, create_unique_id
+from database_utils.database_utils import insert_review, insert_company_infos, get_last_scraping_time, set_last_scraped_at
+from processing.preprocessing import preprocessing_review
+from processing.sentiment_analysis import calculate_sentiment
 
 def get_html(url):
     """
@@ -247,9 +247,13 @@ def scrap_url(url):
     company = get_company_infos(soup)
     
     date_format = '%Y-%m-%dT%H:%M:%S.%fZ'
-    last_time_scraped = datetime.strptime(get_last_scraping_time(company["name"]), date_format)
+    last_scraping_time = get_last_scraping_time(company["name"])
+    current_last_time_scraped = None
+    if last_scraping_time:
+        current_last_time_scraped = datetime.strptime(last_scraping_time, date_format)
+
     number_of_reviews_scraped = 0
-    if not last_time_scraped:
+    if not current_last_time_scraped:
         page = int(last_page)
         stop = False
         while (stop is False and page != 0):
@@ -263,11 +267,11 @@ def scrap_url(url):
         stop = False
         scraped_time = None
         while (stop is False and page != last_page):
-            stop, time_stopped, number_scraped = fetch_page(url, page, last_page, company['name'], last_time_scraped)
+            stop, time_stopped, number_scraped = fetch_page(url, page, last_page, company['name'], current_last_time_scraped)
             if page == 1:
                 scraped_time = time_stopped
             page += 1
-            time.sleep(5)
+            time.sleep(1)
             number_of_reviews_scraped += number_scraped
 
         set_last_scraped_at(company["name"], scraped_time)

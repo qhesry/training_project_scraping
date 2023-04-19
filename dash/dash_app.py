@@ -4,6 +4,10 @@ from dash import html
 import plotly.graph_objs as go
 import requests
 import pandas as pd
+import json
+
+with open('../config.json') as f:
+    config = json.load(f)
 
 app = dash.Dash(__name__)
 
@@ -11,7 +15,7 @@ app = dash.Dash(__name__)
 server = app.server
 
 # URL de l'API FastAPI
-base_url = "http://localhost:8000"
+base_url = config["server_url"]
 
 # Options pour la liste déroulante
 vpn_options = [
