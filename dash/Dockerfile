@@ -1,13 +1,11 @@
-# Dockerfile_dash
-FROM python:3.9-slim
+FROM python:3.10-slim
 
-WORKDIR /app
+WORKDIR /dash
 
-COPY requirements.txt .
+COPY . /dash
 
 RUN pip install -r requirements.txt
 
-COPY . .
+EXPOSE 8050
 
-CMD ["uvicorn", "dash_app:app", "--host", "0.0.0.0", "--port", "8050"]
-
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8050"]

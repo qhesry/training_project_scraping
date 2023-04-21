@@ -1,12 +1,11 @@
-# Dockerfile_fast_api
-FROM python:3.9-slim
+FROM python:3.10-slim
 
-WORKDIR /app
+WORKDIR /fastapi
 
-COPY requirements.txt .
+COPY . /fastapi
 
 RUN pip install -r requirements.txt
 
-COPY . .
+EXPOSE 8000
 
-CMD ["uvicorn", "fast_api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

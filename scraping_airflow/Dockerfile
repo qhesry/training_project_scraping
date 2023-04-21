@@ -1,17 +1,30 @@
 # Dockerfile_airflow
-FROM apache/airflow:2.5.3-python3.9
+FROM python:3.10-slim
 
-WORKDIR /app
+RUN apt-get update && apt-get install -y libpq-dev postgresql-client && rm -rf /var/lib/apt/lists/*
+RUN pip install apache-airflow[postgres]
+
+ENV AIRFLOW_HOME=/usr/local/airflow
+ENV AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+ENV AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
+ENV AIRFLOW__WEBSERVER__AUTHENTICATE=True
+ENV AIRFLOW__WEBSERVER__AUTH_BACKEND=airflow.contrib.auth.backends.password_auth
+ENV AIRFLOW__WEBSERVER__AUTH_USER=admin
+ENV AIRFLOW__WEBSERVER__AUTH_PASSWORD=admin
+
+RUN airflow db init
+RUN airflow users create --username admin --password admin --firstname first --lastname last --role Admin --email admin@example.com
+
+WORKDIR /scraping
 
 COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY . .
+COPY . /scraping
 
-# Configure Airflow
-ENV AIRFLOW_HOME=/app/airflow
-RUN airflow db init
-RUN airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com
+COPY ./dags /usr/local/airflow/dags
 
-CMD ["airflow", "webserver", "--port", "8080"]
+RUN airflow scheduler &
+
+CMD ["airflow", "webserver", "-p", "8080"]
