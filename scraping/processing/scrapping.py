@@ -200,7 +200,7 @@ def fetch_page(base_url, current_page = 1, max_page = 1, company_name = "", last
     - This function requires the helper functions `get_html`, `get_reviews`, `preprocessing_review`, and `insert_review`
       to be defined.
     """
-    print(f"Scraping page : {current_page}/{max_page}")
+    print(f"Scraping page ({company_name}): {current_page}/{max_page}")
 
     # Fetching html for current page, parsing reviews and preprocess them
     html = get_html(f"{base_url}?page={current_page}")
@@ -224,7 +224,7 @@ def fetch_page(base_url, current_page = 1, max_page = 1, company_name = "", last
     print(f"Review parsed for page : {current_page}")
     return stop_fetching, time_stopped, number_scraped
 
-def scrap_url(url):
+def scrap_url(url, testing = True):
     """
     Scrapes the reviews of a company from a given url using BeautifulSoup library and stores them in Elasticsearch index.
 
@@ -241,7 +241,10 @@ def scrap_url(url):
 
     soup = BeautifulSoup(get_home_page_html, "html.parser")
     # Finding page number
-    last_page = soup.find('a', {"name":"pagination-button-last"}).find('span', {"class": "typography_heading-xxs__QKBS8 typography_appearance-inherit__D7XqR typography_disableResponsiveSizing__OuNP7"}).get_text()
+    if testing:
+        last_page = 2
+    else:
+        last_page = soup.find('a', {"name":"pagination-button-last"}).find('span', {"class": "typography_heading-xxs__QKBS8 typography_appearance-inherit__D7XqR typography_disableResponsiveSizing__OuNP7"}).get_text()
 
     # Getting company infos
     company = get_company_infos(soup)

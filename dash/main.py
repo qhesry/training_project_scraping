@@ -3,19 +3,16 @@ from dash import dcc
 from dash import html
 import plotly.graph_objs as go
 import requests
-import pandas as pd
-import json
+import os
 
-with open('../config.json') as f:
-    config = json.load(f)
+fast_api_url = os.environ.get("FAST_API_URL", "http://localhost")
+fast_api_port = os.environ.get("FAST_API_PORT", "8000")
+base_url = f"{fast_api_url}:{fast_api_port}"
 
 app = dash.Dash(__name__)
 
 # Configuration du serveur
 server = app.server
-
-# URL de l'API FastAPI
-base_url = config["server_url"]
 
 # Options pour la liste déroulante
 vpn_options = [
@@ -124,5 +121,5 @@ app.layout = html.Div([
     ], style={'margin-top': '20px'}),
 ], style={'margin': '20px'})
 
-if __name__ == '__main__':
-    app.run_server(debug=True)
+if __name__ == "__main__":
+    app.run_server(host="0.0.0.0", port=8050)

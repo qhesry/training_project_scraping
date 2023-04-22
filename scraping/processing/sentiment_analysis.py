@@ -13,8 +13,7 @@ def calculate_sentiment(review):
     Returns:
     tuple: A tuple containing the sentiment score and accuracy.
     """
-    words = review.split()[:500]
-    tronc_review = ' '.join(words)
+    tronc_review = review[:500]
     result = sentiment_pipeline(tronc_review)
     label = result[0]['label'].split(' ')[0]
     accuracy = result[0]['score']

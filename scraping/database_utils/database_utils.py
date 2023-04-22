@@ -1,8 +1,11 @@
 from elasticsearch import Elasticsearch, exceptions
 import json
-from . import config
+import os
 
-es = Elasticsearch(hosts=config["elasticsearch_hosts"], basic_auth=(config["elasticsearch_username"], config["elasticsearch_password"]), ca_certs=config["elasticsearch_ca_certs_path"])
+es_username = os.environ.get("ELASTICSEARCH_USERNAME", "elastic")
+es_password = os.environ.get("ELASTICSEARCH_PASSWORD", "elastic")
+es_hosts = os.environ.get("ELASTICSEARCH_HOSTS", "http://localhost:9200")
+es = Elasticsearch(hosts=es_hosts, basic_auth=(es_username, es_password))
 
 def create_index():
     """
@@ -22,9 +25,10 @@ def create_index():
     - The JSON mapping files should be located in the "./mappings" directory relative to the current working directory.
     - If an index already exists, it will not be created again.
     """
-    
+    import os
+    mapping_parent_folder = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
     # Load mapping for the "companies_reviews" index
-    with open('./mappings/companies_reviews_mapping.json') as f:
+    with open(f'{mapping_parent_folder}/mappings/companies_reviews_mapping.json') as f:
         companies_reviews_mapping = json.load(f)
 
     # Create the "companies_reviews" index if it does not exist
@@ -32,7 +36,7 @@ def create_index():
         es.indices.create(index="companies_reviews", mappings=companies_reviews_mapping)
 
     # Load mapping for the "companies_infos" index
-    with open('./mappings/companies_infos_mapping.json') as f:
+    with open(f'{mapping_parent_folder}/mappings/companies_infos_mapping.json') as f:
         companies_infos_mapping = json.load(f)
 
     # Create the "companies_infos" index if it does not exist
@@ -40,7 +44,7 @@ def create_index():
         es.indices.create(index="companies_infos", mappings=companies_infos_mapping)
 
     # Load mapping for the "last_scraping" index
-    with open('./mappings/last_scraping_mapping.json') as f:
+    with open(f'{mapping_parent_folder}/mappings/last_scraping_mapping.json') as f:
         last_scraped_at_mapping = json.load(f)
 
     # Create the "last_scraping" index if it does not exist
