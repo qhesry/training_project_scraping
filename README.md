@@ -4,7 +4,11 @@ This project is a web scraping tool that extracts reviews about NordVPN and Cybe
 
 ## Prerequisites
 
-Before you can run this project, you will need to install the following dependencies contained into all the `requirements.txt` files
+Before you can run this project, you will need to install the following dependencies contained into all the `scraping/requirements.txt` files since it's the only thing you will launch manually.
+
+## Development
+
+A bash script has been designed to create a virtual environment containing all the dependencies to work on all 3 projects at the same time.
 
 ## Installation
 
