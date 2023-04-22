@@ -17,8 +17,14 @@ Before you can run this project, you will need to install the following dependen
 
 1. Clone this repository to your local machine.
 2. Launch the docker-compose file using `docker-compose up -d`
-3. Open a web browser and navigate to [http://localhost:8050](http://localhost:8050) to view the dashboard.
+3. Launch the scraping scrip `python scraping/main.py`. By default, it will scrap 2 pages. It can scrap all the pages if function scrap_url parameter `testing` is set to `False`.
+4. Open a web browser and navigate to [http://localhost:8050](http://localhost:8050) to view the dashboard.
 
+
+## To come 
+
+ - Airflow cron job even it's totally overkill for a small project like that.
+ 
 ## Usage
 
 Once the application is running, you can use the Dash app to view some metrics example.

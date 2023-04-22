@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 from airflow import DAG
-from airflow.operators.python import PythonOperator
-from main import scrap
+from airflow.operators.bash import BashOperator
 
 default_args = {
     'owner': 'Hesry_Quentin',
@@ -19,9 +18,9 @@ dag = DAG(
     schedule_interval=timedelta(minutes=30)
 )
 
-execute_script = PythonOperator(
-    task_id='execute_python_script',
-    python_callable=scrap,
+execute_script = BashOperator(
+    task_id='execute_bash_script',
+    bash_command='python3 /scraping_airflow/main.py',
     dag=dag
 )
 

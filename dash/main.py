@@ -120,3 +120,6 @@ app.layout = html.Div([
         html.Span(id='average-accuracy'),
     ], style={'margin-top': '20px'}),
 ], style={'margin': '20px'})
+
+if __name__ == "__main__":
+    app.run_server(host="0.0.0.0", port=8050)

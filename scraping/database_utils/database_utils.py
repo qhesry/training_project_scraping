@@ -25,9 +25,10 @@ def create_index():
     - The JSON mapping files should be located in the "./mappings" directory relative to the current working directory.
     - If an index already exists, it will not be created again.
     """
-    
+    import os
+    mapping_parent_folder = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
     # Load mapping for the "companies_reviews" index
-    with open('./mappings/companies_reviews_mapping.json') as f:
+    with open(f'{mapping_parent_folder}/mappings/companies_reviews_mapping.json') as f:
         companies_reviews_mapping = json.load(f)
 
     # Create the "companies_reviews" index if it does not exist
@@ -35,7 +36,7 @@ def create_index():
         es.indices.create(index="companies_reviews", mappings=companies_reviews_mapping)
 
     # Load mapping for the "companies_infos" index
-    with open('./mappings/companies_infos_mapping.json') as f:
+    with open(f'{mapping_parent_folder}/mappings/companies_infos_mapping.json') as f:
         companies_infos_mapping = json.load(f)
 
     # Create the "companies_infos" index if it does not exist
@@ -43,7 +44,7 @@ def create_index():
         es.indices.create(index="companies_infos", mappings=companies_infos_mapping)
 
     # Load mapping for the "last_scraping" index
-    with open('./mappings/last_scraping_mapping.json') as f:
+    with open(f'{mapping_parent_folder}/mappings/last_scraping_mapping.json') as f:
         last_scraped_at_mapping = json.load(f)
 
     # Create the "last_scraping" index if it does not exist
